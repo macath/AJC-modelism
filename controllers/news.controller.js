@@ -2,9 +2,6 @@ const NewsModel = require('../models/news.model');
 const UserModel = require('../models/user.model');
 const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require('mongoose').Types.ObjectId;
-const fs = require('fs');
-const { promisify } = require('util');
-const pipeline = promisify(require('stream').pipeline);
 
 // READ NEWS
 module.exports.readNews = (req, res) => {
@@ -23,8 +20,8 @@ module.exports.createNews = async (req, res) => {
     const newNews = new NewsModel({
         writterId: req.body.writterId,
         message: req.body.message,
-        picture: req.file,
-        // video: req.body.video
+        picture: req.file.path,
+        video: req.body.video
     });
 
     try {
