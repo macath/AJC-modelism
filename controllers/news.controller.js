@@ -19,39 +19,12 @@ module.exports.readNews = (req, res) => {
 
 // CREATE NEWS
 module.exports.createNews = async (req, res) => {
-    let fileName;
-
-    if (req.file !== null) {
-        try {
-            if (
-                req.file.detectedMimeType !== 'image/jpg' &&
-                req.file.detectedMimeType !== 'image/png' &&
-                req.file.detectedMimeType !== 'image/jpeg'
-            )
-                throw Error('invalid file');
-
-            if (req.file.size > 1000000000)
-                throw Error('max size');
-        } catch (err) {
-            const errors = uploadErrors();
-            return res.status(201).json({ errors });
-        }
-
-        const fileName = req.body.writterId + Date.now() + '.jpg';
-
-        await pipeline(
-            req.file.stream,
-            fs.createWriteStream(
-                `${__dirname}/../client/public/uploads/news/${fileName}`
-            )
-        );
-    }
-
+      
     const newNews = new NewsModel({
         writterId: req.body.writterId,
         message: req.body.message,
-        picture: req.file !== null ? './uploads/news/' + fileName : '',
-        video: req.body.video
+        picture: req.file,
+        // video: req.body.video
     });
 
     try {
