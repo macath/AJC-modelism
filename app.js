@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user.routes');
 const newsRoutes = require('./routes/news.routes');
+const galeryRoutes = require('./routes/galery.routes');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
@@ -34,6 +35,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 // ROUTES
 app.use('/api/user', userRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/galery', galeryRoutes);
 
 // SERVER
 app.listen(process.env.PORT, () => {

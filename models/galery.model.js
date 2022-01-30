@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const NewsSchema = new mongoose.Schema(
+const GalerySchema = new mongoose.Schema(
     {
         writterId: {
             type: String,
@@ -13,7 +13,7 @@ const NewsSchema = new mongoose.Schema(
         },
         message: {
             type: String,
-            trim: true, // retire les blancs en début et fin de chaine
+            trim: true,
             maxlength: 500
         },
         picture: {
@@ -28,4 +28,4 @@ const NewsSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('news', NewsSchema);
+module.exports = mongoose.model('galery', GalerySchema);

@@ -1,64 +1,45 @@
 const UserModel = require('../models/user.model');
-const ObjectID = require('mongoose').Types.ObjectId;
+const { signUpErrors, signInErrors } = require('../utils/errors.utils');
+const jwt = require('jsonwebtoken');
 
-module.exports.getAllUsers = async (req, res) => {
-    const users = await UserModel.find().select('-password');
-    res.status(200).json(users);
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+// GENERATE TOKEN
+const createToken = (id) => {
+    return jwt.sign({id}, process.env.TOKEN_SECRET, {
+        expiresIn: maxAge
+    })
 };
 
-// READ USER
-module.exports.userInfo = (req, res) => {
-    if (!ObjectID.isValid(req.params.id)){
-        return res.status(400).send('ID Unknown : ' + req.params.id);
-    }
-    UserModel.findById(req.params.id, (err, docs) => {
-        if (!err) {
-            res.send(docs);        
-        } else {
-            console.log('ID Unknown : ' + err);
-        }
-    }).select('-password');
-};
-
-// UPDATE USER
-module.exports.updateUser = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id)){
-        return res.status(400).send('ID Unknown : ' + req.params.id);
-    }
+// CREATE USER
+module.exports.signUp = async (req, res) => {
+    const {email, password} = req.body
 
     try {
-        await UserModel.findOneAndUpdate(
-            {_id: req.params.id},
-            {
-                $set: {
-                    bio: req.body.bio
-                }
-            },
-            {new: true, upsert: true, setDefaultsOnInsert: true},
-            (err, docs) => {
-                if (!err) {
-                    return res.send(docs);
-                }
-                if (err) {
-                    return res.status(500).send({ message: err });
-                }
-            }
-        )
+        const user = await UserModel.create({email, password});
+        res.status(201).json({user: user._id});
     } catch (err) {
-        return res.status(500).json({ message: err });
+        const errors = signUpErrors(err);
+        res.status(200).send({ errors });
     }
 };
 
-// DELETE USER
-module.exports.deleteUser = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id)){
-        return res.status(400).send('ID Unknown : ' + req.params.id);
-    }
+// CONNEXION
+module.exports.signIn = async (req, res) => {
+    const { email, password } = req.body;
 
-    try {
-        await UserModel.remove({ _id: req.params.id }).exec();
-        res.status(200).json({ message: "Successfully deleted." });
+    try {   
+        const user = await UserModel.login(email, password);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge });
+        res.status(200).json({user: user._id});
     } catch (err) {
-        return res.status(500).json({ message: err });
+        const errors = signInErrors(err);
+        res.status(200).send({ errors });
     }
+};
+
+// DECONNEXION
+module.exports.logout = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/');
 };

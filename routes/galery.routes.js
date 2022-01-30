@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const newsController = require('../controllers/news.controller');
+const galeryController = require('../controllers/galery.controller');
 
 const multer = require('multer');
 const imageStorage = multer.diskStorage({
-    destination: `${__dirname}/../client/public/uploads/news/`,
+    destination: `${__dirname}/../client/public/uploads/galery/`,
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, file.fieldname + '-' + uniqueSuffix + '.png')
@@ -24,9 +24,9 @@ const upload = multer({
     storage: imageStorage
 });
 
-router.get('/', newsController.readNews);
-router.post('/', upload.single('file'), newsController.createNews)
-router.put('/:id', newsController.updateNews);
-router.delete('/:id', newsController.deleteNews);
+router.get('/', galeryController.readGalery);
+router.post('/', upload.single('file'), galeryController.createGalery)
+router.put('/:id', galeryController.updateGalery);
+router.delete('/:id', galeryController.deleteGalery);
 
 module.exports = router;
