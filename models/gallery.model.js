@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const GalerySchema = new mongoose.Schema(
+const GallerySchema = new mongoose.Schema(
     {
         writterId: {
             type: String,
@@ -28,4 +28,4 @@ const GalerySchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('galery', GalerySchema);
+module.exports = mongoose.model('gallery', GallerySchema);

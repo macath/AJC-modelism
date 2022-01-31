@@ -1,11 +1,11 @@
-const GaleryModel = require('../models/galery.model');
+const GalleryModel = require('../models/gallery.model');
 const UserModel = require('../models/user.model');
 const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require('mongoose').Types.ObjectId;
 
-// READ GALERY
-module.exports.readGalery = (req, res) => {
-    GaleryModel.find((err, docs) => {
+// READ GALLERY
+module.exports.readGallery = (req, res) => {
+    GalleryModel.find((err, docs) => {
         if (!err) {
             res.send(docs);
         } else {
@@ -14,10 +14,10 @@ module.exports.readGalery = (req, res) => {
     }).sort({ createdAt: -1 });
 };
 
-// CREATE GALERY
-module.exports.createGalery = async (req, res) => {
+// CREATE GALLERY
+module.exports.createGallery = async (req, res) => {
       
-    const newGalery = new GaleryModel({
+    const newGallery = new GalleryModel({
         writterId: req.body.writterId,
         message: req.body.message,
         picture: req.file.path,
@@ -25,15 +25,15 @@ module.exports.createGalery = async (req, res) => {
     });
 
     try {
-        const galery = await newGalery.save();
-        return res.status(201).json(galery);
+        const gallery = await newGallery.save();
+        return res.status(201).json(gallery);
     } catch (err) {
         return res.status(400).send(err);
     }
 };
 
-// UPDATE GALERY
-module.exports.updateGalery = (req, res) => {
+// UPDATE GALLERY
+module.exports.updateGallery = (req, res) => {
     if (!ObjectID.isValid(req.params.id)) {
         return res.status(400).send('ID Unknown : ' + req.params.id);
     }
@@ -42,7 +42,7 @@ module.exports.updateGalery = (req, res) => {
         message: req.body.message
     }
 
-    GaleryModel.findByIdAndUpdate(
+    GalleryModel.findByIdAndUpdate(
         req.params.id,
         { $set: updatedRecord },
         { new: true },
@@ -56,13 +56,13 @@ module.exports.updateGalery = (req, res) => {
     );
 };
 
-// DELETE GALERY
-module.exports.deleteGalery = (req, res) => {
+// DELETE GALLERY
+module.exports.deleteGallery = (req, res) => {
     if (!ObjectID.isValid(req.params.id)) {
         return res.status(400).send('ID Unknown : ' + req.params.id);
     }
 
-    GaleryModel.findByIdAndRemove(
+    GalleryModel.findByIdAndRemove(
         req.params.id,
         (err, docs) => {
             if (!err) {
