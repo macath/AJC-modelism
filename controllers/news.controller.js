@@ -20,6 +20,7 @@ module.exports.createNews = async (req, res) => {
     const newNews = new NewsModel({
         writterId: req.body.writterId,
         message: req.body.message,
+        title: req.body.title,
         picture: req.file.path,
         video: req.body.video
     });

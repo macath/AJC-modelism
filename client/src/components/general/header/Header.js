@@ -13,13 +13,13 @@ export default class Header extends Component {
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <NavLink to="/home" className='nav-link' activeClassName="active"> Home </NavLink>
+                                    <NavLink to="/" className='nav-link'> Home </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink to="/gallery" className='nav-link' activeClassName="active"> Galerie </NavLink>
+                                    <NavLink to="/gallery" className='nav-link'> Galerie </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink to="/contact" className='nav-link' activeClassName="active"> Contact </NavLink>
+                                    <NavLink to="/contact" className='nav-link'> Contact </NavLink>
                                 </li>
                             </ul>
                         </div>

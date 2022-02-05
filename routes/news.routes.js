@@ -25,8 +25,10 @@ const upload = multer({
 });
 
 router.get('/', newsController.readNews);
-router.post('/', upload.single('file'), newsController.createNews)
+router.post('/', upload.single('file'), newsController.createNews);
 router.put('/:id', newsController.updateNews);
 router.delete('/:id', newsController.deleteNews);
+
+router.get('/admin/news', newsController.readNews);
 
 module.exports = router;

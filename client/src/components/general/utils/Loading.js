@@ -1,11 +1,12 @@
 import React from "react";
+import loading from "../../../images/loading.gif";
 
-const loader = () => {
+const Loader = () => {
     return(
         <div style={ {minHeight: '100vh'} } className="d-flex flex-row justify-content-center align-items-center w-100">
-            <img src="../../../public/images/loading.gif" alt="loading" />
+            <img src={loading} alt="loading" />
         </div>
     );
 } 
 
-export default loader;
+export default Loader;

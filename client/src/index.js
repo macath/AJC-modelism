@@ -2,15 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { store } from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { store } from './store'
+import { getUsers } from "./store/actions/users.actions";
+import { getNews } from "./store/actions/news.actions";
+import { getGallery } from "./store/actions/gallery.actions";
+
+store.dispatch(getUsers());
+store.dispatch(getNews());
+store.dispatch(getGallery());
 
 ReactDOM.render(
-  <Provider store={store}>
+  <React.StrictMode>
     <Router>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </Router>
-  </Provider>
+  </React.StrictMode>
   , document.getElementById('root')
 );

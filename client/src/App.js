@@ -1,41 +1,59 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Header, Home, Contact, Legal, Admin } from './components/';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchFavoris } from './store/actions';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { UidContext } from "./components/general/AppContext";
+import { getUser } from './store/actions/users.actions';
+import {  Header, 
+          Home, 
+          Gallery, 
+          Contact, 
+          Legal, 
+          Admin, 
+          Inscription,
+          CrudNews,
+          CrudGallery
+         } from './components/';
 
-const LazyGallery = lazy(() =>
-  import(/* webpackChunkName: "Favoris" */'./components/')
-);
+const App = () => {
+  const [uid, setUid] = useState(null);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const fetchToken = async () => {
+      await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}jwtid`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          setUid(res.data);
+        })
+        .catch((err) => console.log("No token"));
+    };
+    fetchToken();
 
-class App extends Component {
-  componentDidMount() {
-    this.props.fetchFavoris();
-  }
+    if (uid) dispatch(getUser(uid));
+  }, [uid, dispatch]);
 
-  render() {
-    return (
-      <div className="App container">
+  return (
+    <div className="App container">
+      <UidContext.Provider value={uid}>
         <Header />
-        <Suspense fallback={<h1>Chargement ...</h1>}>
-          <Switch>
-            <Route path="/home" component={ Home } />
-            <Route path="/gallery" component={LazyGallery} />
-            <Route path="/contact" component={ Contact } />
-            <Route path="/conditions" component={ Legal } />
-            <Route path="/admin" component={ Admin } />
-            <Redirect to="/home" />
-          </Switch>
-        </Suspense>
-      </div>
-    );
-  }
-
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/gallery" component={Gallery} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/conditions" component={Legal} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/api/news/admin/news" component={CrudNews} />
+          <Route path="/api/gallery/admin/gallery" component={CrudGallery} />
+          <Route path="/create_profile" component={Inscription} />
+          <Redirect to="/home" />
+        </Switch>
+      </UidContext.Provider>
+    </div>
+  );
 }
 
-export default withRouter(
-  connect(null, {
-    fetchFavoris
-  })(App)
-);
+export default App;

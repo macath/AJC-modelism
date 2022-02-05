@@ -1,7 +1,10 @@
-export { default as Header } from './header/Header';
-export { default as Loading } from './utils/Loading';
-export { default as Home } from './home/Home';
-export { default as Gallery } from './gallery/Gallery';
-export { default as Contact } from './contact/Contact';
-export { default as Legal } from './legal/Legal';
-export { default as Admin } from './admin/Admin';
+export { default as Header } from './general/header/Header';
+export { default as Loading } from './general/utils/Loading';
+export { default as Home } from './pages/home/Home';
+export { default as Gallery } from './pages/gallery/Gallery';
+export { default as Contact } from './pages/contact/Contact';
+export { default as Legal } from './pages/legal/Legal';
+export { default as Inscription } from './pages/admin/Inscription';
+export { default as Admin } from './pages/admin/Admin';
+export { default as CrudNews } from './pages/admin/crudcomponents/CrudNews';
+export { default as CrudGallery } from './pages/admin/crudcomponents/CrudGallery';

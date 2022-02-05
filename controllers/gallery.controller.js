@@ -20,6 +20,7 @@ module.exports.createGallery = async (req, res) => {
     const newGallery = new GalleryModel({
         writterId: req.body.writterId,
         message: req.body.message,
+        title: req.body.title,
         picture: req.file.path,
         video: req.body.video
     });

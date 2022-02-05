@@ -4,7 +4,7 @@ const userController = require('../controllers/user.controller');
 
 // authentification
 router.post('/create_profile', authController.signUp);
-router.post('/login', authController.signIn);
+router.post('/admin', authController.signIn); // route login
 router.get('/logout', authController.logout);
 
 module.exports = router;
