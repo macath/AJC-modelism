@@ -6,7 +6,7 @@ const imageStorage = multer.diskStorage({
     destination: `${__dirname}/../client/public/uploads/news/`,
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix + '.png')
+        cb(null, file.fieldname + '-' + uniqueSuffix + '.jpg')
     }
 });
 const upload = multer({
@@ -28,7 +28,5 @@ router.get('/', newsController.readNews);
 router.post('/', upload.single('file'), newsController.createNews);
 router.put('/:id', newsController.updateNews);
 router.delete('/:id', newsController.deleteNews);
-
-router.get('/admin/news', newsController.readNews);
 
 module.exports = router;
