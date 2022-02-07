@@ -12,11 +12,11 @@ const cors = require('cors');
 const app = express(); // CREATION DE L'APP
 
 const corsOptions = {
-    origin: process.env.CLIENT_URL,
+    origin: true,
     credentials: true,
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
-    'methods': 'GET,HEAD,PUT,PATCH,NEWS,DELETE',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
     'preflightContinue': false
 }
 
