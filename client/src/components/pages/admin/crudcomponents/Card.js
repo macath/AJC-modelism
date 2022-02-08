@@ -57,7 +57,7 @@ const Card = ({ news }) => {
                             </div>
                         )}
                         {news.picture && (
-                            <img src={news.picture} alt="card-pic" className="card-pic" />
+                            <img src={`${window.location.origin}/uploads/${news.picture}`} alt="card-pic" className="card-pic" />
                         )}
                         {news.video && (
                             <iframe

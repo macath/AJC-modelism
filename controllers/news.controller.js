@@ -21,7 +21,7 @@ module.exports.createNews = async (req, res) => {
         writterId: req.body.writterId,
         message: req.body.message,
         title: req.body.title,
-        picture: req.file.path,
+        picture: req.file.filename,
         video: req.body.video
     });
 
