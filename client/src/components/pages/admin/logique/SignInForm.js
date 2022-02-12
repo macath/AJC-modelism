@@ -2,38 +2,39 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const SignInForm = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-  
-    const handleLogin = (e) => {
-      e.preventDefault();
-      const emailError = document.querySelector(".email.error");
-      const passwordError = document.querySelector(".password.error");
-  
-      axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_URL}api/user/admin`,
-        withCredentials: true,
-        data: {
-          email,
-          password,
-        },
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
+
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/admin`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
+        } else {
+          window.location = "/";
+        }
       })
-        .then((res) => {
-          console.log(res);
-          if (res.data.errors) {
-            emailError.innerHTML = res.data.errors.email;
-            passwordError.innerHTML = res.data.errors.password;
-          } else {
-            window.location = "/";
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-  
-    return (
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  return (
+    <div className="d-flex justify-content-center py-4">
       <form action="" onSubmit={handleLogin} id="sign-up-form">
         <label htmlFor="email">Email</label>
         <br />
@@ -57,9 +58,10 @@ const SignInForm = () => {
         />
         <div className="password error"></div>
         <br />
-        <input type="submit" value="Se connecter" />
+        <input type="submit" value="Se connecter" className="d-block mx-auto btn btn-success mb-5" />
       </form>
-    );
-  };
-  
-  export default SignInForm;
+    </div>
+  );
+};
+
+export default SignInForm;

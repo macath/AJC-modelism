@@ -22,8 +22,8 @@ const Logout = () => {
   };
 
   return (
-    <button className="btn btn-warning" onClick={logout}>
-      Logout
+    <button className="btn btn-warning m-3 d-block ms-auto logoutbtn" onClick={logout}>
+      Deconnexion
     </button>
   );
 };

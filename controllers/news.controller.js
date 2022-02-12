@@ -16,12 +16,12 @@ module.exports.readNews = (req, res) => {
 
 // CREATE NEWS
 module.exports.createNews = async (req, res) => {
-      
+    const pic = req && req.file && req.file.filename ? req.file.filename : null
     const newNews = new NewsModel({
         writterId: req.body.writterId,
         message: req.body.message,
         title: req.body.title,
-        picture: req.file.filename,
+        picture: pic,
         video: req.body.video
     });
 

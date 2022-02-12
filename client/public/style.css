@@ -1,0 +1,254 @@
+/* GENERAL */
+
+::-webkit-scrollbar {
+    width: 12px;
+    background: #121316;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px black; 
+    box-shadow: inset 0 0 6px grey;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px black; 
+    box-shadow: inset 0 0 6px black;
+}
+
+body{
+    background: no-repeat url("./images/bg3.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-color: black; */
+    color: white;
+    font-size: 18px;
+}
+
+li{
+    list-style-type: none;
+}
+
+.headernav{
+    min-height: 70px;
+    background-color: #121316 !important;
+    position: fixed;
+    width: 100%;
+}
+
+.headernav .nav-link{
+    color: white !important;
+    font-size: 18px;
+}
+
+.headernav .nav-link:hover{
+    color: red !important;
+}
+
+.headernav a{
+    color: white !important;
+    font-size: 20px;
+}
+
+.headernav a:hover{
+    color: red !important;
+}
+
+.logoajc{
+    padding-top: 10px;
+    vertical-align: -140%;
+}
+
+.nav-link{
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link:hover{
+    color: red;
+}
+
+hr{
+    width: 30%;
+    margin: 0 auto;
+}
+
+hr{
+    background-color: red;
+}
+
+.cardstyle{
+    background-color: #121316;
+    color: white;
+    width: 90%;
+    border-radius: 5%;
+}
+
+.card-pic{
+    width: 80%;
+}
+
+.cardate{
+    font-size: 12px;
+}
+
+.cardvid{
+    width: 800px;
+    height: 450px;
+}
+
+@media screen and (min-width:651px) and (max-width: 1200px){
+    .cardvid{
+        max-width: 550px;
+        max-height: 300px;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .cardvid{
+        max-width: 300px;
+        max-height: 150px;
+    }
+}
+
+.homepic{
+    padding-top: 120px;
+}
+
+/* HOME  */
+
+.contpresentation{
+    background-color: #121316;
+}
+
+.presentation{
+    width: 70%;
+}
+
+
+/* GALLERY */
+
+.galerie{
+    padding-top: 120px;
+}
+
+
+/* CONTACT */
+
+.contact{
+    padding-top: 120px;
+}
+
+.contact a{
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+}
+
+.contact a:hover{
+    color: red;
+}
+
+.numerotel{
+    font-size: 25px;
+}
+
+.contactpic{
+    width: 300px;
+}
+
+
+/* LEGAL */
+
+.legal{
+    padding-top: 120px;
+}
+
+.legal a{
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+}
+
+.legal a:hover{
+    color: red;
+}
+
+.adminspace{
+    font-size: 10px !important;
+}
+
+
+/* ADMIN */
+
+.admin{
+    padding-top: 120px;
+}
+
+.buttonadmin{
+    width: 180px;
+    height: 60px;
+    background-color: #121316;
+    border-radius: 10%;
+}
+
+.buttonadmin:hover {
+        transform: scale(1.05);
+        transition: all 0.3s;
+}
+
+.logoutbtn:hover {
+    transform: scale(1.10);
+    transition: all 0.3s;
+}
+
+.adminpage{
+    padding-top: 120px;
+}
+
+.admincard{
+    background-color: #121316;
+    color: white;
+    width: 60%;
+    border-radius: 5%;
+}
+
+.textcard{
+    min-width: 500px;
+}
+
+@media screen and (max-width: 1200px){
+    .textcard{
+        min-width: 220px;
+    }
+}
+
+.loginform{
+    padding-top: 120px;
+}
+
+
+/* FOOTER */
+
+.copyright{
+    font-size: 12px;
+}
+
+.footer{
+    background-color: #121316;
+    min-height: 135px;
+}
+
+.footer p{
+    margin-bottom: 0;
+}
+
+.footer2{
+ background-color: #0b0c0e;
+ height: 40px;
+}
+
+.footer2 p{
+    margin-bottom: 0;
+}

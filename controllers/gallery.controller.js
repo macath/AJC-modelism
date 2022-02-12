@@ -16,12 +16,12 @@ module.exports.readGallery = (req, res) => {
 
 // CREATE GALLERY
 module.exports.createGallery = async (req, res) => {
-      
+    const pic = req && req.file && req.file.filename ? req.file.filename : null
     const newGallery = new GalleryModel({
         writterId: req.body.writterId,
         message: req.body.message,
         title: req.body.title,
-        picture: req.file.filename,
+        picture: pic,
         video: req.body.video
     });
 

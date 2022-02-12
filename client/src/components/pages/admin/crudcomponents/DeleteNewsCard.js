@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteNews } from "../../../../store/actions/news.actions";
 
-const DeleteCard = (props) => {
+const DeleteNewsCard = (props) => {
     const dispatch = useDispatch();
 
     const deleteQuote = () => dispatch(deleteNews(props.id));
@@ -21,4 +21,4 @@ const DeleteCard = (props) => {
     );
 };
 
-export default DeleteCard;
+export default DeleteNewsCard;

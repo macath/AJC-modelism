@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNews } from "../../../../store/actions/news.actions";
-import Card from "./Card";
+import NewsCard from "./CardAdminNews";
 import { isEmpty } from "../../../general/utils/Utils";
 import NewNewsForm from "../logique/NewNewsForm";
+import { NavLink } from "react-router-dom";
 
 const CrudNews = () => {
   const [loadNews, setLoadNews] = useState(true);
@@ -29,13 +30,15 @@ const CrudNews = () => {
   }, [loadNews, dispatch, count]);
 
   return (
-    <div className="thread-container">
+    <div className="thread-container adminpage">
+      <NavLink to="/admin" className='nav-link text-end'> Retour accueil admin </NavLink>
       <NewNewsForm />
       <ul>
         {!isEmpty(news[0]) &&
           news.map((news) => {
-            return <Card news={news} key={news._id} />;
-          })}
+            return <NewsCard news={news} key={news._id} />;
+          })
+        }
       </ul>
     </div>
   );

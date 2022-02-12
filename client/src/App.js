@@ -4,7 +4,8 @@ import axios from "axios";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { UidContext } from "./components/general/AppContext";
 import { getUser } from './store/actions/users.actions';
-import {  Header, 
+import {  Header,
+          Footer, 
           Home, 
           Gallery, 
           Contact, 
@@ -37,7 +38,7 @@ const App = () => {
   }, [uid, dispatch]);
 
   return (
-    <div className="App container">
+    <div className="App">
       <UidContext.Provider value={uid}>
         <Header />
         <Switch>
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/create_profile" component={Inscription} />
           <Redirect to="/home" />
         </Switch>
+        <Footer />
       </UidContext.Provider>
     </div>
   );

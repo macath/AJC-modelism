@@ -1,4 +1,5 @@
 export { default as Header } from './general/header/Header';
+export { default as Footer } from './general/footer/Footer';
 export { default as Loading } from './general/utils/Loading';
 export { default as Home } from './pages/home/Home';
 export { default as Gallery } from './pages/gallery/Gallery';

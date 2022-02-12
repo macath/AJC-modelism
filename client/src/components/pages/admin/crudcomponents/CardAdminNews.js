@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dateParser, isEmpty } from "../../../general/utils/Utils";
 import { updateNews } from "../../../../store/actions/news.actions";
-import DeleteCard from "./DeleteCard";
+import DeleteNewsCard from "./DeleteNewsCard";
 import Loader from "../../../general/utils/Loading";
 
-const Card = ({ news }) => {
+const NewsCard = ({ news }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
@@ -24,55 +24,59 @@ const Card = ({ news }) => {
     }, [newsData]);
 
     return (
-        <li className="card-container" key={news._id}>
+        <li className="card-container admincard mb-5 d-block mx-auto" key={news._id}>
             {isLoading ? (
                 <Loader />
             ) : (
                 <>
                     <div className="card-right">
                         <div className="card-header">
-                        {isUpdated === false && <h3>{news.title}</h3>}
-                        {isUpdated && (
-                            <div className="update-title">
-                                <textarea
-                                    defaultValue={news.title}
-                                    onChange={(e) => setTextUpdate(e.target.value)}
-                                />
+                            {isUpdated === false && <h3 className="d-flex justify-content-center">{news.title}</h3>}
+                            {isUpdated && (
+                                <div className="update-title">
+                                    <textarea
+                                        defaultValue={news.title}
+                                        onChange={(e) => setTextUpdate(e.target.value)}
+                                        className="d-block mx-auto"
+                                    />
+                                </div>
+                            )}
+                            <div className="d-flex justify-content-end">
+                                <button className="btn btn-primary me-2" onClick={() => setIsUpdated(!isUpdated)}>Edit</button>
+                                <DeleteNewsCard id={news._id} />
                             </div>
-                        )}
-                            <span>{dateParser(news.createdAt)}</span>
                         </div>
-                        {isUpdated === false && <p>{news.message}</p>}
+                        {isUpdated === false && <p className="d-flex justify-content-center">{news.message}</p>}
                         {isUpdated && (
                             <div className="update-post">
                                 <textarea
                                     defaultValue={news.message}
                                     onChange={(e) => setTextUpdate(e.target.value)}
+                                    className="d-block mx-auto mb-2 textcard"
                                 />
                                 <div className="button-container">
-                                    <button className="btn btn-success" onClick={updateItem}>
+                                    <button className="btn btn-success d-block mx-auto mb-2" onClick={updateItem}>
                                         Valider modification
                                     </button>
                                 </div>
                             </div>
                         )}
                         {news.picture && (
-                            <img src={`${window.location.origin}/uploads/${news.picture}`} alt="card-pic" className="card-pic" />
+                            <img src={`${window.location.origin}/uploads/${news.picture}`} alt="card-pic" className="rounded mx-auto d-block card-pic" />
                         )}
                         {news.video && (
                             <iframe
-                                width="500"
-                                height="300"
                                 src={news.video}
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
+                                className="d-block mx-auto cardvid"
                                 title={news._id}
                             ></iframe>
                         )}
                         <div className="button-container">
-                            <button className="btn btn-primary" onClick={() => setIsUpdated(!isUpdated)}>Edit</button>
-                            <DeleteCard id={news._id} />
+
+                            <span className="d-flex justify-content-end pt-4 pb-1 pe-5 cardate">{dateParser(news.createdAt)}</span>
                         </div>
                     </div>
                 </>
@@ -81,4 +85,4 @@ const Card = ({ news }) => {
     );
 };
 
-export default Card;
+export default NewsCard;

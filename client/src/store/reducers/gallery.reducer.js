@@ -22,7 +22,7 @@ export default function galleryReducer(state = initialState, action) {
         } else return gallery;
       });
     case DELETE_GALLERY:
-      return state.filter((gallery) => gallery._id !== action.payload.newsId);
+      return state.filter((gallery) => gallery._id !== action.payload.galleryId);
     default:
       return state;
   }

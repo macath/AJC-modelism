@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty, timestampParser } from "../../../general/utils/Utils";
-import { addNews, getNews } from "../../../../store/actions/news.actions";
+import { addGallery, getGallery } from "../../../../store/actions/gallery.actions";
 import Loader from "../../../general/utils/Loading";
 
-const NewNewsForm = () => {
+const NewGalleryForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [title, setTitle] = useState("");
-  const [newsPicture, setNewsPicture] = useState(null);
+  const [galleryPicture, setGalleryPicture] = useState(null);
   const [video, setVideo] = useState("");
   const [file, setFile] = useState();
   const userData = useSelector((state) => state.usersReducer);
-  const newsData = useSelector((state) => state.newsReducer);
+  const galleryData = useSelector((state) => state.galleryReducer);
   const error = useSelector((state) => state.errorsReducer.newsError);
   const dispatch = useDispatch();
-  
+
   const handlePost = async () => {
-    if (title || message || newsPicture || video) {
+    if (title || message || galleryPicture || video) {
       const data = new FormData();
       data.append('writterId', userData._id);
       data.append('message', message);
@@ -25,31 +25,31 @@ const NewNewsForm = () => {
       if (file) data.append("file", file);
       data.append('video', video);
 
-      await dispatch(addNews(data));
-      dispatch(getNews());
+      await dispatch(addGallery(data));
+      dispatch(getGallery());
       cancelPost();
     } else {
       alert("Veuillez entrer un message")
     }
   };
- 
+
   const handlePicture = (e) => {
-    setNewsPicture(URL.createObjectURL(e.target.files[0]));
+    setGalleryPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
     setVideo('');
-  }; 
+  };
 
   const cancelPost = () => {
     setTitle("");
     setMessage("");
-    setNewsPicture("");
+    setGalleryPicture("");
     setVideo("");
     setFile("");
   };
 
 
   useEffect(() => {
-    if (!isEmpty(newsData[0])) setIsLoading(false);
+    if (!isEmpty(galleryData[0])) setIsLoading(false);
 
     const handleVideo = () => {
       let findLink = message.split(" ");
@@ -62,12 +62,12 @@ const NewNewsForm = () => {
           setVideo(embed.split("&")[0]);
           findLink.splice(i, 1);
           setMessage(findLink.join(" "));
-          setNewsPicture('');
+          setGalleryPicture('');
         }
       }
     };
     handleVideo();
-  }, [newsData, message, title, video]);
+  }, [galleryData, message, title, video]);
 
   return (
     <div className="post-container d-flex justify-content-center">
@@ -76,15 +76,14 @@ const NewNewsForm = () => {
       ) : (
         <>
           <div className="post-form admincard pt-3 mb-5">
-          <textarea
+            <textarea
               name="title"
               id="title"
-              placeholder="Titre"
+              placeholder="le titre"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
               className="d-block mx-auto my-3 textcard"
             />
-            <br />
             <textarea
               name="message"
               id="message"
@@ -93,12 +92,12 @@ const NewNewsForm = () => {
               value={message}
               className="d-block mx-auto mb-2 textcard"
             />
-            {message || newsPicture || video.length > 20 ? (
+            {message || galleryPicture || video.length > 20 ? (
               <li className="card-container">
                 <div className="card-right">
                   <div className="content">
                     <p className="text-center">{message}</p>
-                    <img src={newsPicture} alt="" className="img-fluid w-50 d-block mx-auto" />
+                    <img src={galleryPicture} alt="" className="img-fluid w-50 d-block mx-auto" />
                     {video && (
                       <iframe
                         src={video}
@@ -129,7 +128,6 @@ const NewNewsForm = () => {
                     />
                   </>
                 )}
-                
                 {video && (
                   <button className="d-block mx-auto" onClick={() => setVideo("")}>Supprimer video</button>
                 )}
@@ -137,7 +135,7 @@ const NewNewsForm = () => {
               {!isEmpty(error.format) && <p>{error.format}</p>}
               {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
               <div className="btn-send">
-                {message || newsPicture || video.length > 20 ? (
+                {message || galleryPicture || video.length > 20 ? (
                   <button className="cancel d-block mx-auto" onClick={cancelPost}>
                     Annuler news
                   </button>
@@ -154,4 +152,4 @@ const NewNewsForm = () => {
   );
 };
 
-export default NewNewsForm;
+export default NewGalleryForm;
