@@ -1,14 +1,35 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "../../general/utils/Utils";
+import { getNews } from "../../../store/actions/news.actions";
 import HomeNews from "./HomeNews";
 
 const Home = () => {
+    const [loadNews, setLoadNews] = useState(true);
+    const [count, setCount] = useState(3);
+    const dispatch = useDispatch();
     const news = useSelector((state) => state.newsReducer);
+
+    const loadMore = () => {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
+            setLoadNews(true);
+        }
+    }
+
+    useEffect(() => {
+        if (loadNews) {
+            dispatch(getNews(count));
+            setLoadNews(false);
+            setCount(count + 3);
+        }
+
+        window.addEventListener('scroll', loadMore);
+        return () => window.removeEventListener('scroll', loadMore);
+    }, [loadNews, dispatch, count]);
+
 
     return (
         <div className="home">
-            <img src={`${window.location.origin}/images/home.jpg`} alt="home" className="img-fluid mt-2 pt-5 homepic" />
             <div className="contpresentation">
                 <h1 className="d-flex justify-content-center pt-5 pb-3">Qui sommes nous</h1>
                 <hr />

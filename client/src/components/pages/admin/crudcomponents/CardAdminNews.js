@@ -46,7 +46,7 @@ const NewsCard = ({ news }) => {
                                 <DeleteNewsCard id={news._id} />
                             </div>
                         </div>
-                        {isUpdated === false && <p className="d-flex justify-content-center">{news.message}</p>}
+                        {isUpdated === false && <p className="d-flex justify-content-center textmargin">{news.message}</p>}
                         {isUpdated && (
                             <div className="update-post">
                                 <textarea

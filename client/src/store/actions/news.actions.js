@@ -17,7 +17,6 @@ export const getNews = (num) => {
       .then((res) => {
         const array = res.data.slice(0, num);
         dispatch({ type: GET_NEWS, payload: array });
-        dispatch({ type: GET_ALL_NEWS, payload: res.data });
       })
       .catch((err) => console.log(err));
   };
@@ -59,6 +58,17 @@ export const deleteNews = (newsId) => {
     })
       .then((res) => {
         dispatch({ type: DELETE_NEWS, payload: { newsId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const getAllNews = () => {
+  return (dispatch) => {
+    return axios
+      .get(`${process.env.REACT_APP_API_URL}api/news/`)
+      .then((res) => {
+        dispatch({ type: GET_ALL_NEWS, payload: res.data });
       })
       .catch((err) => console.log(err));
   };

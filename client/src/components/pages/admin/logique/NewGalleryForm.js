@@ -96,7 +96,7 @@ const NewGalleryForm = () => {
               <li className="card-container">
                 <div className="card-right">
                   <div className="content">
-                    <p className="text-center">{message}</p>
+                    <p className="d-flex justify-content-center textmargin">{message}</p>
                     <img src={galleryPicture} alt="" className="img-fluid w-50 d-block mx-auto" />
                     {video && (
                       <iframe

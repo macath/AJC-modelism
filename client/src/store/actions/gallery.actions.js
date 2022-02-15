@@ -17,7 +17,6 @@ export const getGallery = (num) => {
       .then((res) => {
         const array = res.data.slice(0, num);
         dispatch({ type: GET_GALLERY, payload: array });
-        dispatch({ type: GET_ALL_GALLERY, payload: res.data });
       })
       .catch((err) => console.log(err));
   };
@@ -59,6 +58,19 @@ export const deleteGallery = (galleryId) => {
     })
       .then((res) => {
         dispatch({ type: DELETE_GALLERY, payload: { galleryId } });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+
+export const getAllGallery = (num) => {
+  return (dispatch) => {
+    return axios
+      .get(`${process.env.REACT_APP_API_URL}api/gallery/`)
+      .then((res) => {
+        dispatch({ type: GET_ALL_GALLERY, payload: res.data });
+
       })
       .catch((err) => console.log(err));
   };

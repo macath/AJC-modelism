@@ -35,6 +35,7 @@ li{
     background-color: #121316 !important;
     position: fixed;
     width: 100%;
+    z-index:10;
 }
 
 .headernav .nav-link{
@@ -251,4 +252,9 @@ hr{
 
 .footer2 p{
     margin-bottom: 0;
+}
+
+.textmargin{
+    margin-right: 40px;
+    margin-left: 40px;
 }

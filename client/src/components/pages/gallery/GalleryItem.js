@@ -19,9 +19,9 @@ const GalleryItem = ({ gallery }) => {
                 <>
                     <div className="card-right">
                         <div className="card-header">
-                        <h3 className="d-flex justify-content-center">{gallery.title}</h3>
+                        <h3 className="d-flex justify-content-center textmargin">{gallery.title}</h3>
                         </div>
-                        <p className="d-flex justify-content-center">{gallery.message}</p>
+                        <p className="d-flex justify-content-center textmargin">{gallery.message}</p>
                         {gallery.picture && (
                             <img src={`${window.location.origin}/uploads/${gallery.picture}`} alt="card-pic" className="rounded mx-auto d-block card-pic" />
                         )}

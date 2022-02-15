@@ -19,9 +19,9 @@ const HomeNews = ({ news }) => {
                 <>
                     <div className="card-right">
                         <div className="card-header">
-                        <h3 className="d-flex justify-content-center">{news.title}</h3>
+                        <h3 className="d-flex justify-content-center textmargin">{news.title}</h3>
                         </div>
-                        <p className="d-flex justify-content-center">{news.message}</p>
+                        <p className="d-flex justify-content-center textmargin">{news.message}</p>
                         {news.picture && (
                             <img src={`${window.location.origin}/uploads/${news.picture}`} alt="card-pic" className="rounded mx-auto d-block card-pic" />
                         )}

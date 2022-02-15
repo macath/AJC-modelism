@@ -36,6 +36,7 @@ const App = () => {
 
     if (uid) dispatch(getUser(uid));
   }, [uid, dispatch]);
+  
 
   return (
     <div className="App">

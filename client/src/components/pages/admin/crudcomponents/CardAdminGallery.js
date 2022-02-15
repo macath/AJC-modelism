@@ -46,7 +46,7 @@ const GalleryCard = ({ gallery }) => {
                                 <DeleteGalleryCard id={gallery._id} />
                             </div>
                         </div>
-                        {isUpdated === false && <p className="d-flex justify-content-center">{gallery.message}</p>}
+                        {isUpdated === false && <p className="d-flex justify-content-center textmargin">{gallery.message}</p>}
                         {isUpdated && (
                             <div className="update-post">
                                 <textarea
